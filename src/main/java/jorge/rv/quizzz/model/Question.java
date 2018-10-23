@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "question")
-public class Question extends BaseModel implements UserOwned {
+public class Question extends BaseModel {
 
 	@Size(min = 2, max = 150, message = "The question should be between 2 and 150 characters")
 	@NotNull(message = "Question text not provided")
@@ -71,12 +71,6 @@ public class Question extends BaseModel implements UserOwned {
 
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	@Override
-	@JsonIgnore
-	public User getUser() {
-		return quiz.getUser();
 	}
 
 	public Integer getOrder() {

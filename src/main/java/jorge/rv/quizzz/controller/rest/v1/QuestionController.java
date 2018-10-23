@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +39,6 @@ public class QuestionController {
 	private AnswerService answerService;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Question save(@Valid Question question, BindingResult result, @RequestParam Long quiz_id) {
 
@@ -53,7 +51,6 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/updateAll", method = RequestMethod.POST)
-	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.OK)
 	public void updateAll(@RequestBody List<Question> questions) {
 		for (int i = 0; i < questions.size(); i++) {
@@ -65,7 +62,6 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{question_id}", method = RequestMethod.GET)
-	@PreAuthorize("permitAll")
 	@ResponseStatus(HttpStatus.OK)
 	public Question find(@PathVariable Long question_id) {
 
@@ -73,7 +69,6 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{question_id}", method = RequestMethod.POST)
-	@PreAuthorize("isAuthenticated()")
 	@ResponseStatus(HttpStatus.OK)
 	public Question update(@PathVariable Long question_id, @Valid Question question, BindingResult result) {
 
@@ -85,7 +80,7 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{question_id}", method = RequestMethod.DELETE)
-	@PreAuthorize("isAuthenticated()")
+
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable Long question_id) {
 		Question question = questionService.find(question_id);
@@ -93,7 +88,7 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{question_id}/answers", method = RequestMethod.GET)
-	@PreAuthorize("permitAll")
+
 	@ResponseStatus(HttpStatus.OK)
 	public List<Answer> findAnswers(@PathVariable Long question_id) {
 		Question question = questionService.find(question_id);
@@ -101,7 +96,7 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{question_id}/correctAnswer", method = RequestMethod.GET)
-	@PreAuthorize("isAuthenticated()")
+
 	@ResponseStatus(HttpStatus.OK)
 	public Answer getCorrectAnswer(@PathVariable Long question_id) {
 		Question question = questionService.find(question_id);
@@ -109,7 +104,7 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{question_id}/correctAnswer", method = RequestMethod.POST)
-	@PreAuthorize("isAuthenticated()")
+
 	@ResponseStatus(HttpStatus.OK)
 	public void setCorrectAnswer(@PathVariable Long question_id, @RequestParam Long answer_id) {
 

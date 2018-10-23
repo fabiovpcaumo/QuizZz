@@ -17,11 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "quiz")
-public class Quiz extends BaseModel implements UserOwned {
-
-	@OneToOne
-	@JsonIgnore
-	private User createdBy;
+public class Quiz extends BaseModel {
 
 	@Size(min = 2, max = 100, message = "The name must be between 2 and 100 messages.")
 	@NotNull(message = "Please provide a name")
@@ -52,14 +48,6 @@ public class Quiz extends BaseModel implements UserOwned {
 		this.questions = exercises;
 	}
 
-	public User getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(User createdBy) {
-		this.createdBy = createdBy;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -76,11 +64,6 @@ public class Quiz extends BaseModel implements UserOwned {
 		this.name = name;
 	}
 
-	@Override
-	@JsonIgnore
-	public User getUser() {
-		return getCreatedBy();
-	}
 
 	public Boolean getIsPublished() {
 		return isPublished;

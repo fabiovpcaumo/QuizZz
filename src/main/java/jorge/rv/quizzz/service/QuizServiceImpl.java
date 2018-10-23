@@ -16,7 +16,6 @@ import jorge.rv.quizzz.exceptions.ResourceUnavailableException;
 import jorge.rv.quizzz.exceptions.UnauthorizedActionException;
 import jorge.rv.quizzz.model.Question;
 import jorge.rv.quizzz.model.Quiz;
-import jorge.rv.quizzz.model.User;
 import jorge.rv.quizzz.model.support.Response;
 import jorge.rv.quizzz.model.support.Result;
 import jorge.rv.quizzz.repository.QuizRepository;
@@ -34,12 +33,6 @@ public class QuizServiceImpl implements QuizService {
 	public QuizServiceImpl(QuizRepository quizRepository, QuestionService questionService) {
 		this.quizRepository = quizRepository;
 		this.questionService = questionService;
-	}
-
-	@Override
-	public Quiz save(Quiz quiz, User user) {
-		quiz.setCreatedBy(user);
-		return quizRepository.save(quiz);
 	}
 
 	@Override
@@ -85,11 +78,6 @@ public class QuizServiceImpl implements QuizService {
 	@Override
 	public Page<Quiz> search(String query, Pageable pageable) {
 		return quizRepository.searchByName(query, pageable);
-	}
-
-	@Override
-	public Page<Quiz> findQuizzesByUser(User user, Pageable pageable) {
-		return quizRepository.findByCreatedBy(user, pageable);
 	}
 
 	@Override
