@@ -23,6 +23,7 @@ public class QuestionServiceImpl implements QuestionService {
 	private static final Logger logger = LoggerFactory.getLogger(QuestionServiceImpl.class);
 	private QuestionRepository questionRepository;
 
+	@Autowired
 	private AnswerService answerService;
 
 	@Autowired
