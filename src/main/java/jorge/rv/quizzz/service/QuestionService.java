@@ -24,9 +24,11 @@ public interface QuestionService {
 	Boolean checkIsCorrectAnswer(Question question, Long answer_id);
 
 	void setCorrectAnswer(Question question, Answer answer);
-
+	
 	Answer getCorrectAnswer(Question question);
 
+	void setAnswerService(AnswerService answerService);
+	
 	Answer addAnswerToQuestion(Answer answer, Question question);
 
 	int countQuestionsInQuiz(Quiz quiz);

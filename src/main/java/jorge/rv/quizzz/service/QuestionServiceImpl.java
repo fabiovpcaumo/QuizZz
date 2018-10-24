@@ -27,11 +27,15 @@ public class QuestionServiceImpl implements QuestionService {
 	private AnswerService answerService;
 
 	@Autowired
-	public QuestionServiceImpl(QuestionRepository questionRepository, AnswerService answerService) {
+	public QuestionServiceImpl(QuestionRepository questionRepository) {
 		this.questionRepository = questionRepository;
-		this.answerService = answerService;
 	}
 
+	@Override
+	public void setAnswerService(AnswerService answerService) {
+		this.answerService = answerService;
+	}
+	
 	@Override
 	public Question save(Question question) throws UnauthorizedActionException {
 		int count = questionRepository.countByQuiz(question.getQuiz());
