@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "question")
 public class Question extends BaseModel {
 
-	@Size(min = 2, max = 150, message = "The question should be between 2 and 150 characters")
+	@Size(min = 2, max = 1500, message = "The question should be between 2 and 1500 characters")
 	@NotNull(message = "Question text not provided")
 	private String text;
 
